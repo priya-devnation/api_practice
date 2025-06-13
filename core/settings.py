@@ -33,6 +33,7 @@ INBUILT_APPS = [
 PROJECT_APPS = [
     'apps.students', # Students app
     'apps.todo', #todo app
+    'apps.holiday', #holiday app
 ]
 
 # Third-party apps
