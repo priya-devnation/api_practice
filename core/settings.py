@@ -32,6 +32,7 @@ INBUILT_APPS = [
 # Project apps
 PROJECT_APPS = [
     'apps.students', # Students app
+    'apps.todo', #todo app
 ]
 
 # Third-party apps
@@ -110,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
