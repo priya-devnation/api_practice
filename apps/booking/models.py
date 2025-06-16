@@ -1,16 +1,8 @@
 #from django modules
 from django.db import models
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 # Project modules
 from apps.event.models import Event
->>>>>>> 76113ae86d37a24978ec2fd3d8bf7133ba0a3ff8
-=======
-# Project modules
-from apps.event.models import Event
->>>>>>> 76113ae86d37a24978ec2fd3d8bf7133ba0a3ff8
 
 # Create your models here.
 class Booking(models.Model):
