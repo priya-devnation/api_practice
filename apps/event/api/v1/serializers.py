@@ -9,5 +9,7 @@ from apps.event.models import Event
 class EventSerializer(serializers.ModelSerializer):
     class meta:
         model = Event
-        fields =['event_name','event_date' ,'location',#'capasity' 
-                 ]
+        fields =['event_name','event_date' ,'location','capacity']
+
+    
+

@@ -1,11 +1,12 @@
 #RestFramework Modules
 from rest_framework import serializers
 
-from time import timezone
+
 
 #project modules
 
 from apps.booking.models import Booking
+
 
        
 class BookingSerializer(serializers.ModelSerializer):
@@ -25,8 +26,15 @@ class BookingSerializer(serializers.ModelSerializer):
 
 
     def validate_booking_date(self, value):
-        if value < timezone.now().event_date():
-            raise serializers.ValidationError("Booking date cannot be in the past! ")
-        return value 
+        event = value.get('event_data')
+        booking_date = value.get('booked_at')
+        
+        if event and booking_date:
+            if booking_date >= event.date:
+                raise serializers.ValidationError("Booking date must be before the event date.")
+        
+        return value
+    
+    
 
     
