@@ -35,6 +35,7 @@ PROJECT_APPS = [
     'apps.todo', #todo app
     'apps.holiday', #holiday app
     'apps.booking', #booking app
+    'apps.event', #event app
 ]
 
 # Third-party apps
