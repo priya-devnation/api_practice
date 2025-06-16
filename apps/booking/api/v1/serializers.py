@@ -4,16 +4,10 @@ from rest_framework import serializers
 from time import timezone
 
 #project modules
-from apps.booking.models import Event
+
 from apps.booking.models import Booking
 
-class EventSerializer(serializers.ModelSerializer):
-    class meta:
-        model = Event
-        fields =['event_name','event_date' ,'location',#'capasity' 
-                 ]
-        
-        
+       
 class BookingSerializer(serializers.ModelSerializer):
     class meta:
         model = Booking
