@@ -1,7 +1,6 @@
 #RestFramework Modules
 from rest_framework import serializers
 
-from time import timezone
 
 #project modules
 from apps.event.models import Event
