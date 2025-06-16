@@ -8,6 +8,7 @@ urlpatterns = [
     path('api/v1/todo/', include('apps.todo.api.v1.urls')), # todo app
     path('api/v1/holiday/', include('apps.holiday.api.v1.urls')), # holiday app
     path('api/v1/booking/', include('apps.booking.api.v1.urls')), # booking app
+    path('api/v1/event', include('apps.event.api.v1.urls')), #event app
  ]
 
 
