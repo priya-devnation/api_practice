@@ -1,3 +1,4 @@
+#rest framework modules
 from rest_framework.views import APIView
 from rest_framework.views import Response
 from rest_framework.views import status
@@ -10,7 +11,7 @@ from .serializers import EventSerializer
 from apps.booking.models import Booking
 from .serializers import BookingSerializer
 
-
+#view for listing and creating
 class EventListCreateAPIView(APIView):
     serializer_class = EventSerializer
 
@@ -36,7 +37,7 @@ class EventListCreateAPIView(APIView):
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-
+#view for retrieving updating and deleting
 class EventRetrieveUpdateDeleteAPIView(APIView):
     serializer_class = EventSerializer
 
@@ -63,14 +64,14 @@ class EventRetrieveUpdateDeleteAPIView(APIView):
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     def delete(self, request, pk):
         try:
-            event.objects.get(pk=pk).delete()
+            Event.objects.get(pk=pk).delete()
             return Response({"detail":"event deleted successfully"},status=status.HTTP_204_NO_CONTENT)
         except ValidationError as ve:
             raise ve
         except Exception as e:  # Handle other exceptions
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
+#view for listing and creating
 class BookingListCreateAPIView(APIView):
     serializer_class = BookingSerializer
 
@@ -98,7 +99,7 @@ class BookingListCreateAPIView(APIView):
 
     
 
-
+#view for retrieving updating and deleting
 class BookingRetrieveUpdateDeleteAPIView(APIView):
     serializer_class = BookingSerializer
 
@@ -125,8 +126,8 @@ class BookingRetrieveUpdateDeleteAPIView(APIView):
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     def delete(self, request, pk):
         try:
-            booking.objects.get(pk=pk).delete()
-            return Response({"detail":"event deleted successfully"},status=status.HTTP_204_NO_CONTENT)
+            Booking.objects.get(pk=pk).delete()
+            return Response({"detail":"booking deleted successfully"},status=status.HTTP_204_NO_CONTENT)
         except ValidationError as ve:
             raise ve
         except Exception as e:  # Handle other exceptions
