@@ -12,10 +12,10 @@ from .serializers import EventSerializer
 #view for listing and creating
 class EventListCreateAPIView(APIView):
     serializer_class = EventSerializer
-
+    
     def get(self, request):
         try:
-            event = Event.objects.only('event_name','event_date', 'location').all()
+            event = Event.objects.only('event_name','event_date', 'location','capacity').all()
             serializer = self.serializer_class(event, many=True)
             return Response(serializer.data)
         except ValidationError as ve:

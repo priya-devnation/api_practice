@@ -10,31 +10,25 @@ from apps.booking.models import Booking
 
        
 class BookingSerializer(serializers.ModelSerializer):
-    class meta:
+    class Meta:
         model = Booking
         fields =['name','email','ph_no','event','booked_at']
 
 
-    def validate_email(self, data):
-        email = data.get('email')
+    def validate(self, attrs):
+        email = attrs.get('email')
+        event = attrs.get('event')
+        booked_at = attrs.get('booked_at')
+
         if email:
             existing_count = Booking.objects.filter(email=email).count()
-            if not self.instance or self.instance.email  != email:
+            if self.instance is None or  self.instance.email  != email:
                 if existing_count > 2:
-                    raise serializers.ValidationError("Only 2 bookings are allowed for one email id.")
-                return data
+                    raise serializers.ValidationError({"email" : "Only 2 bookings are allowed for one email id."})
+                
 
-
-    def validate_booking_date(self, value):
-        event = value.get('event_data')
-        booking_date = value.get('booked_at')
+        if event and booked_at and booked_at > event.event_date:
+            raise serializers.ValidationError({"booked_at":"Booking date must be besfore the event date."})
         
-        if event and booking_date:
-            if booking_date >= event.date:
-                raise serializers.ValidationError("Booking date must be before the event date.")
-        
-        return value
-    
-    
-
+        return attrs
     

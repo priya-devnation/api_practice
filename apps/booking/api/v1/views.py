@@ -23,6 +23,7 @@ class BookingListCreateAPIView(APIView):
             raise ve
         except Exception as e:  # Handle other exceptions
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+   
     def post(self, request):
         try:
             serializer = self.serializer_class(data=request.data)
@@ -35,8 +36,6 @@ class BookingListCreateAPIView(APIView):
         except Exception as e:  # Handle other exceptions
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
-    
 
 #view for retrieving updating and deleting
 class BookingRetrieveUpdateDeleteAPIView(APIView):

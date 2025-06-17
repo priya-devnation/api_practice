@@ -12,5 +12,5 @@ class Booking(models.Model):
     event = models.ForeignKey(Event, on_delete = models.PROTECT)             #foriegn key
     booked_at = models.DateTimeField(auto_now_add=True)
 
-    def ___str___(self):
+    def __str__(self):
         return self.name
