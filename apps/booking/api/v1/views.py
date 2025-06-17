@@ -50,6 +50,7 @@ class BookingRetrieveUpdateDeleteAPIView(APIView):
             raise ve
         except Exception as e:  # Handle other exceptions
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
     def patch(self, request, pk):
         try:
             booking = Booking.objects.get(pk=pk)
@@ -62,6 +63,7 @@ class BookingRetrieveUpdateDeleteAPIView(APIView):
             raise ve
         except Exception as e:  # Handle other exceptions
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
     def delete(self, request, pk):
         try:
             Booking.objects.get(pk=pk).delete()
