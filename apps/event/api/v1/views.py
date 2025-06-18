@@ -15,7 +15,7 @@ class EventListCreateAPIView(APIView):
     
     def get(self, request):
         try:
-            event = Event.objects.only('event_name','event_date', 'location','capacity').all()
+            event = Event.objects.only('event_name','event_date','location','capacity').all()
             serializer = self.serializer_class(event, many=True)
             return Response(serializer.data)
         except ValidationError as ve:
@@ -60,6 +60,7 @@ class EventRetrieveUpdateDeleteAPIView(APIView):
             raise ve
         except Exception as e:  # Handle other exceptions
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
     def delete(self, request, pk):
         try:
             Event.objects.get(pk=pk).delete()
