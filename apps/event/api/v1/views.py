@@ -1,4 +1,4 @@
-#rest framework modules 
+#Restframework modules 
 from rest_framework.views import APIView
 from rest_framework.views import Response
 from rest_framework.views import status
@@ -9,7 +9,7 @@ from apps.event.models import Event
 from .serializers import EventSerializer
 
 
-#view for listing and creating
+#view for listing and creating Events
 class EventListCreateAPIView(APIView):
     serializer_class = EventSerializer
     
@@ -35,7 +35,7 @@ class EventListCreateAPIView(APIView):
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-#view for retrieving updating and deleting
+#view for retrieving updating and deleting specific event
 class EventRetrieveUpdateDeleteAPIView(APIView):
     serializer_class = EventSerializer
 

@@ -6,7 +6,7 @@ from django.core.validators import MaxValueValidator
 # Create your models here.
 class Event(models.Model):
     event_name = models.CharField(max_length=100, null=False, blank=False)
-    event_date = models.DateField()
+    event_date = models.DateField(null=False, blank=False)
     location = models.CharField(max_length=100, null=False, blank=False)
     capacity = models.PositiveBigIntegerField(validators=[MaxValueValidator(5, message="capacity must be 5 or less.")],null=True,blank=True)
 
