@@ -4,13 +4,12 @@ from rest_framework.views import Response
 from rest_framework.views import status
 from rest_framework.exceptions import ValidationError
 
+
 #project modules
-
-
 from apps.booking.models import Booking
 from .serializers import BookingSerializer
 
-#view for listing and creating
+#view for listing and creating Booking
 class BookingListCreateAPIView(APIView):
     serializer_class = BookingSerializer
 
@@ -37,7 +36,7 @@ class BookingListCreateAPIView(APIView):
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-#view for retrieving updating and deleting
+#view for retrieving updating and deleting Booking
 class BookingRetrieveUpdateDeleteAPIView(APIView):
     serializer_class = BookingSerializer
 
