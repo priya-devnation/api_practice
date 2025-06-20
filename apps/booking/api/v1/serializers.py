@@ -15,6 +15,7 @@ class BookingSerializer(serializers.ModelSerializer):
         email = attrs.get('email')
         event = attrs.get('event')
         booked_at = attrs.get('booked_at')
+        booking_count = Booking.objects.filter(event=event).count()
 
         if email:
 
@@ -29,6 +30,9 @@ class BookingSerializer(serializers.ModelSerializer):
 
         if event and booked_at and booked_at > event.event_date:
             raise serializers.ValidationError({"booked_at":"Booking date must be before the event date."})
+        
+        if booking_count >=5:
+            raise serializers.ValidationError("This event has reached its capacity which was only 5.")
         
         return attrs
     
