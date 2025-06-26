@@ -16,7 +16,8 @@ class TaskListCreateAPIView(APIView):
 
     def get(self, request):
         try:
-            task = Task.objects.only('id','Task_name','Task_description','Task_status','Due_date').all()
+            task = Task.objects.only('id','Task_name','Task_description','Task_status','Due_date'#,'Employee_name'
+                                     ).all()
             serializer = self.serializer_class(task, many=True)
             return Response(serializer.data)
         except ValidationError as ve:
