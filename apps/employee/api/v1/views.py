@@ -5,21 +5,19 @@ from rest_framework import status
 from rest_framework.exceptions import ValidationError
 
 # Project modules
-from apps.task.models import Task
-from .create_serializers import TaskCreateSerializer
-#from .list_serializers import TaskListSerializer
+from apps.employee.models import Employee
+from .serializers import EmployeeSerializer
 
 
 
-
-# view for creating and listing tasks
-class TaskListCreateAPIView(APIView):
-    serializer_class = TaskCreateSerializer
+# view for creating and listing employees
+class EmployeeListCreateAPIView(APIView):
+    serializer_class = EmployeeSerializer
 
     def get(self, request):
         try:
-            task = Task.objects.only('id','Task_name','Task_description','Task_status','Due_date','Employee_name','Tags','Priority').all()
-            serializer = self.serializer_class(task, many=True)
+            employee = Employee.objects.only('id','Employee_name','Employee_role','Employee_email').all()
+            serializer = self.serializer_class(employee, many=True)
             return Response(serializer.data)
         except ValidationError as ve:
             raise ve
@@ -38,14 +36,14 @@ class TaskListCreateAPIView(APIView):
         except Exception as e:  # Handle other exceptions
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-# view for retrieving, updating and deleting a specific Student
-class TaskRetrieveUpdateDeleteAPIView(APIView):
-    serializer_class = TaskCreateSerializer
+# view for retrieving, updating and deleting a specific employee
+class EmployeeRetrieveUpdateDeleteAPIView(APIView):
+    serializer_class = EmployeeSerializer
 
     def get(self, request, pk):
         try:
-            task = Task.objects.get(pk=pk)
-            serializer = self.serializer_class(task)
+            employee = Employee.objects.get(pk=pk)
+            serializer = self.serializer_class(employee)
             return Response(serializer.data)
         except ValidationError as ve:
             raise ve
@@ -54,8 +52,8 @@ class TaskRetrieveUpdateDeleteAPIView(APIView):
 
     def patch(self, request, pk):
         try:
-            task = Task.objects.get(pk=pk)
-            serializer = self.serializer_class(task, data=request.data,partial=True)
+            employee = Employee.objects.get(pk=pk)
+            serializer = self.serializer_class(employee, data=request.data,partial=True)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data)
@@ -67,8 +65,8 @@ class TaskRetrieveUpdateDeleteAPIView(APIView):
 
     def delete(self, request, pk):
         try:
-            Task.objects.get(pk=pk).delete()
-            return Response({"detail":"task deleted successfully"},status=status.HTTP_204_NO_CONTENT)
+            Employee.objects.get(pk=pk).delete()
+            return Response({"detail":"employee deleted successfully"},status=status.HTTP_204_NO_CONTENT)
         except ValidationError as ve:
             raise ve
         except Exception as e:  # Handle other exceptions
