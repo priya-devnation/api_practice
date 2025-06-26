@@ -16,7 +16,7 @@ class EmployeeListCreateAPIView(APIView):
 
     def get(self, request):
         try:
-            employee = Employee.objects.only('id','Employee_name','Employee_role').all()
+            employee = Employee.objects.only('id','Employee_name','Employee_role','Employee_email').all()
             serializer = self.serializer_class(employee, many=True)
             return Response(serializer.data)
         except ValidationError as ve:
