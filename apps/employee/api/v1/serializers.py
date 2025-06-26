@@ -8,3 +8,11 @@ class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
         fields = ['id','Employee_name','Employee_role','Employee_email']
+
+
+
+    def validate_email(self, value):
+        if Employee.objects.filter(employee_email=value).exists():
+            raise serializers.ValidationError("A user with this email id already exists")
+        return value
+
