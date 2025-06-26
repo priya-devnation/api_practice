@@ -10,6 +10,7 @@ urlpatterns = [
     path('api/v1/booking/', include('apps.booking.api.v1.urls')), # booking app
     path('api/v1/event/', include('apps.event.api.v1.urls')), #event app
     path('api/v1/task/', include('apps.task.api.v1.urls')), #task app
+    path('api/v1/employee/', include('apps.employee.api.v1.urls')), #employee app
  
 ]
 
