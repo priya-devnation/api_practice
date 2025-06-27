@@ -6,7 +6,7 @@ from rest_framework.exceptions import ValidationError
 
 # Project modules
 from apps.task.models import Task
-from .serializers import TaskCreateSerializer,TaskListSerializer
+from .serializers import TaskCreateUpdateSerializer,TaskListSerializer
 
 
 
@@ -14,7 +14,7 @@ from .serializers import TaskCreateSerializer,TaskListSerializer
 
 # view for creating tasks
 class TaskCreateAPIView(APIView):
-    serializer_class = TaskCreateSerializer
+    serializer_class = TaskCreateUpdateSerializer
     
     def post(self, request):
         try:
@@ -45,7 +45,7 @@ class TaskListAPIView(APIView):
 
 # view for retrieving, updating and deleting a specific Student
 class TaskRetrieveUpdateDeleteAPIView(APIView):
-    serializer_class = TaskCreateSerializer
+    serializer_class = TaskCreateUpdateSerializer
 
     def get(self, request, uuid):
         try:
