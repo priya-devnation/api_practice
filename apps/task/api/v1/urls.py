@@ -7,5 +7,5 @@ from .views import TaskCreateAPIView,TaskListAPIView, TaskRetrieveUpdateDeleteAP
 urlpatterns = [
     path('', TaskCreateAPIView.as_view(), name='task-create'), # url for  creating tasks
     path('list/', TaskListAPIView.as_view(), name='task-list'), # url for  listing tasks
-    path('<int:pk>/', TaskRetrieveUpdateDeleteAPIView.as_view(), name='task-detail-update-delete'), # url for retrieving, updating and deleting a specific task
+    path('<uuid:uuid>/', TaskRetrieveUpdateDeleteAPIView.as_view(), name='task-detail-update-delete'), # url for retrieving, updating and deleting a specific task
 ]
