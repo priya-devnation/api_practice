@@ -14,7 +14,7 @@ class Task(models.Model):
     Due_date = models.DateField(null=False, blank=False)
     Employee_name = models.ForeignKey(Employee, on_delete = models.PROTECT, null=False, blank=False, related_name='task_master_employee_name_foriegn_key')  #foriegn key
     Tags = models.CharField(max_length=15, choices=[('Internal', 'Internal'), ('HR', 'HR'),('Back_end', 'Back_end'),('Front_end','Front_end')], default='Internal')
-    Priority = models.CharField(max_length=10, choices=[('High','High'),('Normal','Normal')],default='Normal')
+    Priority = models.CharField(max_length=10, choices=[('Urgent','Urgent'),('High','High'),('Normal','Normal'),('Low',('Low'))],default='Normal')
 
     def __str__(self):
         return self.Task_name
