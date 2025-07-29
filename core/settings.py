@@ -43,6 +43,7 @@ PROJECT_APPS = [
 # Third-party apps
 THIRD_PARTY_APPS = [
     'rest_framework', # Django REST framework
+    'corsheaders',
 
 ]
 
@@ -51,12 +52,14 @@ INSTALLED_APPS = INBUILT_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 # Inbuilt middleware
 INBUILT_MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 MIDDLEWARE = INBUILT_MIDDLEWARE
@@ -132,3 +135,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# CORS configuration
+# CORS_ALLOWED_ORIGINS                                                                    = ["http://localhost:5173", "http://127.0.0.1:8000","https://ocytocine.devnation.be","https://console.ocytocine.devnation.be"]
+CORS_ALLOW_ALL_ORIGINS                                                                  = True
+CORS_ALLOW_CREDENTIALS                                                                  = True

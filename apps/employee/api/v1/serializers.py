@@ -7,7 +7,7 @@ from apps.employee.models import Employee
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ['id','uuid','Employee_name','Employee_role','Employee_email']
+        fields = ['id','uuid','employee_name','employee_role','employee_email']
 
 
 

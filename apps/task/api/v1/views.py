@@ -6,7 +6,7 @@ from rest_framework.exceptions import ValidationError
 
 # Project modules
 from apps.task.models import Task
-from .serializers import TaskCreateSerializer,TaskListSerializer
+from .serializers import TaskCreateUpdateSerializer,TaskListSerializer
 
 
 
@@ -14,7 +14,7 @@ from .serializers import TaskCreateSerializer,TaskListSerializer
 
 # view for creating tasks
 class TaskCreateAPIView(APIView):
-    serializer_class = TaskCreateSerializer
+    serializer_class = TaskCreateUpdateSerializer
     
     def post(self, request):
         try:
@@ -33,7 +33,7 @@ class TaskListAPIView(APIView):
 
     def get(self, request):
         try:
-            task = Task.objects.only('Task_name','Due_date','Employee_name','Priority').all()
+            task = Task.objects.only('uuid','task_name','due_date','employee_name','priority').all()
             serializer = self.serializer_class(task, many=True)
             return Response(serializer.data)
         except ValidationError as ve:
@@ -45,11 +45,11 @@ class TaskListAPIView(APIView):
 
 # view for retrieving, updating and deleting a specific Student
 class TaskRetrieveUpdateDeleteAPIView(APIView):
-    serializer_class = TaskCreateSerializer
+    serializer_class = TaskCreateUpdateSerializer
 
-    def get(self, request, pk):
+    def get(self, request, uuid):
         try:
-            task = Task.objects.get(pk=pk)
+            task = Task.objects.get(uuid=uuid)
             serializer = self.serializer_class(task)
             return Response(serializer.data)
         except ValidationError as ve:
@@ -57,9 +57,9 @@ class TaskRetrieveUpdateDeleteAPIView(APIView):
         except Exception as e:  # Handle other exceptions
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    def patch(self, request, pk):
+    def patch(self, request, uuid):
         try:
-            task = Task.objects.get(pk=pk)
+            task = Task.objects.get(uuid=uuid)
             serializer = self.serializer_class(task, data=request.data,partial=True)
             if serializer.is_valid():
                 serializer.save()
@@ -70,9 +70,9 @@ class TaskRetrieveUpdateDeleteAPIView(APIView):
         except Exception as e:  # Handle other exceptions
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    def delete(self, request, pk):
+    def delete(self, request, uuid):
         try:
-            Task.objects.get(pk=pk).delete()
+            Task.objects.get(uuid=uuid).delete()
             return Response({"detail":"task deleted successfully"},status=status.HTTP_204_NO_CONTENT)
         except ValidationError as ve:
             raise ve

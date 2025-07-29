@@ -16,7 +16,7 @@ class EmployeeListCreateAPIView(APIView):
 
     def get(self, request):
         try:
-            employee = Employee.objects.only('id','uuid','Employee_name','Employee_role','Employee_email').all()
+            employee = Employee.objects.only('id','uuid','employee_name','employee_role','employee_email').all()
             serializer = self.serializer_class(employee, many=True)
             return Response(serializer.data)
         except ValidationError as ve:
@@ -40,9 +40,9 @@ class EmployeeListCreateAPIView(APIView):
 class EmployeeRetrieveUpdateDeleteAPIView(APIView):
     serializer_class = EmployeeSerializer
 
-    def get(self, request, pk):
+    def get(self, request, uuid):
         try:
-            employee = Employee.objects.get(pk=pk)
+            employee = Employee.objects.get(uuid=uuid)
             serializer = self.serializer_class(employee)
             return Response(serializer.data)
         except ValidationError as ve:
@@ -50,9 +50,9 @@ class EmployeeRetrieveUpdateDeleteAPIView(APIView):
         except Exception as e:  # Handle other exceptions
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    def patch(self, request, pk):
+    def patch(self, request, uuid):
         try:
-            employee = Employee.objects.get(pk=pk)
+            employee = Employee.objects.get(uuid=uuid)
             serializer = self.serializer_class(employee, data=request.data,partial=True)
             if serializer.is_valid():
                 serializer.save()
@@ -63,9 +63,9 @@ class EmployeeRetrieveUpdateDeleteAPIView(APIView):
         except Exception as e:  # Handle other exceptions
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    def delete(self, request, pk):
+    def delete(self, request, uuid):
         try:
-            Employee.objects.get(pk=pk).delete()
+            Employee.objects.get(uuid=uuid).delete()
             return Response({"detail":"employee deleted successfully"},status=status.HTTP_204_NO_CONTENT)
         except ValidationError as ve:
             raise ve

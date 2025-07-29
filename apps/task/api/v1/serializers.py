@@ -3,14 +3,14 @@ from rest_framework import serializers
 # Project modules
 from apps.task.models import Task
 
-class TaskCreateSerializer(serializers.ModelSerializer):
+class TaskCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['id','uuid','Task_name', 'Task_description', 'Task_status', 'Due_date','Employee_name','Tags','Priority']
+        fields = ['id','uuid','task_name', 'task_description', 'task_status', 'due_date','employee_name','tags','priority']
 
 
 class TaskListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['Task_name', 'Due_date','Employee_name','Priority']
+        fields = ['uuid','task_name', 'due_date','employee_name','priority']
 
